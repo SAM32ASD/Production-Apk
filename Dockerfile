@@ -1,43 +1,42 @@
-# Étape 1 : Image de base pour la compilation
-FROM eclipse-temurin:11-jdk AS build
+# Étape 1 : Utiliser une image de base avec OpenJDK 11
+FROM openjdk:11-jdk-slim AS build
 
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Installer Maven
+# Définir la version de Java pour Maven
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Télécharger et installer Maven 3.9.9
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget tar && \
+    apt-get install -y wget && \
     wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz && \
     tar -xzf apache-maven-3.9.9-bin.tar.gz -C /opt/ && \
     ln -s /opt/apache-maven-3.9.9/bin/mvn /usr/bin/mvn && \
-    rm apache-maven-3.9.9-bin.tar.gz && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm apache-maven-3.9.9-bin.tar.gz
 
-# Vérifier la version de Java
-RUN java -version
+# Vérifier les versions de Java et Maven
+RUN java -version && mvn -version
 
-# Copier le fichier pom.xml et télécharger les dépendances en cache
+# Copier le fichier pom.xml et le dossier src pour construire l'image
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
-
-# Copier le code source
 COPY src ./src
 
-# Construire l'application
+# Construire l'application (cela génère le fichier WAR dans le dossier target)
 RUN mvn clean package -DskipTests
 
-# Étape 2 : Image de base pour Tomcat
+# Étape 2 : Créer l'image finale avec Tomcat
 FROM tomcat:9.0-jdk11-openjdk
 
 # Supprimer les applications par défaut de Tomcat
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copier le WAR depuis l'étape précédente
+# Copier le fichier WAR généré depuis l'étape précédente
 COPY --from=build /app/target/production-engineering.war /usr/local/tomcat/webapps/ROOT.war
 
 # Exposer le port 8080
 EXPOSE 8080
 
-# Lancer Tomcat
+# Démarrer Tomcat
 CMD ["catalina.sh", "run"]
