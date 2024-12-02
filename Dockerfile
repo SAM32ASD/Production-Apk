@@ -1,8 +1,16 @@
-# Étape 1 : Build avec Maven
-FROM maven:3.8.6-openjdk-11 AS build
+# Étape 1 : Utiliser une image de base avec OpenJDK
+FROM openjdk:11-jdk-slim AS build
 
 # Définir le répertoire de travail
 WORKDIR /app
+
+# Télécharger et installer Maven 3.9.9
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz && \
+    tar -xzf apache-maven-3.9.9-bin.tar.gz -C /opt/ && \
+    ln -s /opt/apache-maven-3.9.9/bin/mvn /usr/bin/mvn && \
+    rm apache-maven-3.9.9-bin.tar.gz
 
 # Copier le fichier pom.xml et le dossier src pour construire l'image
 COPY pom.xml .
