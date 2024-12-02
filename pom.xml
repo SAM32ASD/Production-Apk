@@ -63,12 +63,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Autres dépendances nécessaires peuvent être ajoutées ici -->
     </dependencies>
 
     <build>
         <finalName>production-engineering</finalName>
 
-        <!-- Définir les ressources -->
+        <!-- Configuration des ressources -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -77,7 +78,6 @@
             <resource>
                 <directory>src/main/webapp</directory>
                 <filtering>false</filtering>
-                <!-- Exclure les fichiers Java -->
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
@@ -91,13 +91,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!-- Version compatible avec Java 11 -->
                 <version>3.8.1</version>
                 <configuration>
-                    <!-- Assurez-vous que ces propriétés sont correctes -->
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
-                    <!-- Encodage du projet -->
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
@@ -106,55 +103,28 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <!-- Version à jour -->
                 <version>3.3.2</version>
                 <configuration>
-                    <!-- Ignorer le fichier web.xml manquant si nécessaire -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-
-                    <!-- Répertoire source pour le WAR -->
+                    <failOnMissingWebXml>${failOnMissingWebXml}</failOnMissingWebXml>
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
-
-                    <!-- Ressources web à inclure dans le WAR -->
-                    <webResources>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                            <!-- Filtrage des ressources JSP et XML -->
-                            <filtering>true</filtering>
-                            <!-- Inclure les fichiers JSP et XML -->
-                            <includes>
-                                <include>**/*.jsp</include>
-                                <include>**/*.xml</include>
-                            </includes>
-                        </resource>
-                    </webResources>
-
                 </configuration>
-
             </plugin>
 
-            <!-- Maven Resources Plugin (optionnel) -->
-            <!--<plugin>-->
-              <!--<groupId></groupId>-->
-              <!--<artifactId></artifactId>-->
-              <!--<version></version>-->
-              <!--<configuration>-->
-                  <!--<encoding>${project.build.sourceEncoding}</encoding>-->
-              <!--</configuration>-->
-          <!-- </plugin-->
-          
-          <!-- Maven Clean Plugin (optionnel) -->
-          <!--<plugin>-->
-              <!--<groupId></groupId>-->
-              <!--<artifactId></artifactId>-->
-              <!--<version></version>-->
-          <!-- </plugin-->
+            <!-- Maven Resources Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
 
-          <!-- Ajoutez d'autres plugins si nécessaire -->
+            <!-- Maven Clean Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
 
         </plugins>
 
     </build>
-
-    <!-- Assurez-vous de fermer la balise de projet ici -->
 </project>
