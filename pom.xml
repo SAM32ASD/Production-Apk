@@ -63,7 +63,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Autres dépendances nécessaires peuvent être ajoutées ici -->
     </dependencies>
 
     <build>
@@ -92,7 +91,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!-- Utiliser une version compatible avec Java 11 -->
+                <!-- Version compatible avec Java 11 -->
                 <version>3.8.1</version>
                 <configuration>
                     <!-- Assurez-vous que ces propriétés sont correctes -->
@@ -135,33 +134,28 @@
             </plugin>
 
             <!-- Maven Resources Plugin -->
-            <plugin xmlns="http://maven.apache.org/POM/4.0.0">
-                ...
-                ...
-                ...
-            </plugin>
-
-            <!-- Maven Clean Plugin -->
-            <!-- Optionnel, mais utile pour nettoyer le répertoire de construction -->
+            <!-- Ajoutez ce plugin si nécessaire, sinon vous pouvez le supprimer -->
             <!--<plugin>-->
-              <!--<groupId>org.apache.maven.plugins</groupId>-->
-              <!--<artifactId>maven-clean-plugin</artifactId>-->
-              <!--<version>3.1.0</version>-->
+              <!--<groupId></groupId>-->
+              <!--<artifactId></artifactId>-->
+              <!--<version></version>-->
               <!--<configuration>-->
-                  <!--<filesets>-->
-                      <!--<fileset directory="${project.build.directory}">-->
-                          <!--<include name="**/*"/>-->
-                      <!--</fileset>-->
-                  <!--</filesets>-->
+                  <!--<encoding>${project.build.sourceEncoding}</encoding>-->
               <!--</configuration>-->
           <!-- </plugin>-->
           
+          <!-- Maven Clean Plugin (optionnel) -->
+          <!--<plugin>-->
+              <!--<groupId>org.apache.maven.plugins</groupId>-->
+              <!--<artifactId>maven-clean-plugin</artifactId>-->
+              <!--<version>3.1.0</version>-->
+          <!-- </plugin-->
+
           <!-- Ajoutez d'autres plugins si nécessaire -->
 
         </plugins>
 
     </build>
 
-    <!-- Ajoutez d'autres configurations de projet si nécessaire -->
-
+    <!-- Assurez-vous de fermer la balise de projet ici -->
 </project>
