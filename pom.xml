@@ -133,8 +133,7 @@
 
             </plugin>
 
-            <!-- Maven Resources Plugin -->
-            <!-- Ajoutez ce plugin si nécessaire, sinon vous pouvez le supprimer -->
+            <!-- Maven Resources Plugin (optionnel) -->
             <!--<plugin>-->
               <!--<groupId></groupId>-->
               <!--<artifactId></artifactId>-->
@@ -142,13 +141,13 @@
               <!--<configuration>-->
                   <!--<encoding>${project.build.sourceEncoding}</encoding>-->
               <!--</configuration>-->
-          <!-- </plugin>-->
+          <!-- </plugin-->
           
           <!-- Maven Clean Plugin (optionnel) -->
           <!--<plugin>-->
-              <!--<groupId>org.apache.maven.plugins</groupId>-->
-              <!--<artifactId>maven-clean-plugin</artifactId>-->
-              <!--<version>3.1.0</version>-->
+              <!--<groupId></groupId>-->
+              <!--<artifactId></artifactId>-->
+              <!--<version></version>-->
           <!-- </plugin-->
 
           <!-- Ajoutez d'autres plugins si nécessaire -->
