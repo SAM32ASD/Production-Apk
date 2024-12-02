@@ -62,10 +62,14 @@
             <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Autres dépendances nécessaires peuvent être ajoutées ici -->
     </dependencies>
 
     <build>
         <finalName>production-engineering</finalName>
+
+        <!-- Définir les ressources -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -74,21 +78,27 @@
             <resource>
                 <directory>src/main/webapp</directory>
                 <filtering>false</filtering>
+                <!-- Exclure les fichiers Java -->
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
             </resource>
         </resources>
-        
+
+        <!-- Plugins Maven -->
         <plugins>
+
             <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <!-- Utiliser une version compatible avec Java 11 -->
                 <version>3.8.1</version>
                 <configuration>
+                    <!-- Assurez-vous que ces propriétés sont correctes -->
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <!-- Encodage du projet -->
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
@@ -97,39 +107,60 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <!-- Version à jour -->
                 <version>3.3.2</version>
                 <configuration>
+                    <!-- Ignorer le fichier web.xml manquant si nécessaire -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+
+                    <!-- Répertoire source pour le WAR -->
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
+
+                    <!-- Ressources web à inclure dans le WAR -->
                     <webResources>
                         <resource>
                             <directory>src/main/webapp</directory>
+                            <!-- Filtrage des ressources JSP et XML -->
                             <filtering>true</filtering>
+                            <!-- Inclure les fichiers JSP et XML -->
                             <includes>
                                 <include>**/*.jsp</include>
                                 <include>**/*.xml</include>
                             </includes>
                         </resource>
                     </webResources>
+
                 </configuration>
+
             </plugin>
 
             <!-- Maven Resources Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
+            <plugin xmlns="http://maven.apache.org/POM/4.0.0">
+                ...
+                ...
+                ...
             </plugin>
 
             <!-- Maven Clean Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-            </plugin>
+            <!-- Optionnel, mais utile pour nettoyer le répertoire de construction -->
+            <!--<plugin>-->
+              <!--<groupId>org.apache.maven.plugins</groupId>-->
+              <!--<artifactId>maven-clean-plugin</artifactId>-->
+              <!--<version>3.1.0</version>-->
+              <!--<configuration>-->
+                  <!--<filesets>-->
+                      <!--<fileset directory="${project.build.directory}">-->
+                          <!--<include name="**/*"/>-->
+                      <!--</fileset>-->
+                  <!--</filesets>-->
+              <!--</configuration>-->
+          <!-- </plugin>-->
+          
+          <!-- Ajoutez d'autres plugins si nécessaire -->
+
         </plugins>
+
     </build>
-</project>
+
+    <!-- Ajoutez d'autres configurations de projet si nécessaire -->
+
