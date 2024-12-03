@@ -9,19 +9,18 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <!-- Propriétés du projet -->
     <properties>
-        <!-- Configuration de la version Java -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <java.version>11</java.version>
-
-        <!-- Versions des dépendances -->
-        <spring.version>5.3.20</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>5.3.20</spring.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
+    <!-- Dépendances -->
     <dependencies>
         <!-- Spring MVC -->
         <dependency>
@@ -68,8 +67,15 @@
         </dependency>
     </dependencies>
 
+    <!-- Configuration du build -->
     <build>
         <finalName>production-engineering</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 
         <plugins>
             <!-- Maven Compiler Plugin -->
@@ -90,8 +96,15 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <failOnMissingWebXml>${failOnMissingWebXml}</failOnMissingWebXml>
                 </configuration>
+            </plugin>
+
+            <!-- Maven Surefire Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
             </plugin>
         </plugins>
     </build>
