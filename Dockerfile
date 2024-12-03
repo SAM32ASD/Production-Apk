@@ -4,7 +4,7 @@ FROM maven:3.9.9-openjdk-11-slim AS build
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier le fichier pom.xml et le dossier src
+# Copier les fichiers nécessaires pour le build
 COPY pom.xml .
 COPY src ./src
 
