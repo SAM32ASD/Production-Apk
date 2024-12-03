@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <!-- Propriétés du projet -->
+    <!-- Propriétés globales -->
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -70,15 +70,9 @@
     <!-- Configuration du build -->
     <build>
         <finalName>production-engineering</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
 
         <plugins>
-            <!-- Maven Compiler Plugin -->
+            <!-- Plugin Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -90,7 +84,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven WAR Plugin -->
+            <!-- Plugin Maven WAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -98,13 +92,6 @@
                 <configuration>
                     <failOnMissingWebXml>${failOnMissingWebXml}</failOnMissingWebXml>
                 </configuration>
-            </plugin>
-
-            <!-- Maven Surefire Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
             </plugin>
         </plugins>
     </build>
