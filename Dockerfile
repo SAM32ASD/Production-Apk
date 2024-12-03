@@ -4,15 +4,15 @@ FROM maven:3.9.9-openjdk-11-slim AS build
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers nécessaires pour le build
-COPY pom.xml ./
+# Copier le fichier pom.xml et le dossier src
+COPY pom.xml .
 COPY src ./src
 
 # Construire l'application (cela génère le fichier WAR dans le dossier target)
 RUN mvn clean package -DskipTests
 
 # Étape 2 : Utiliser une image Tomcat avec Java 11
-FROM tomcat:9.0-jdk11-slim
+FROM tomcat:9.0-jdk11-openjdk
 
 # Supprimer les applications par défaut de Tomcat
 RUN rm -rf /usr/local/tomcat/webapps/*
